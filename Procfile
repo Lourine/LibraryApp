@@ -1,4 +1,3 @@
-web: gunicorn LibraryApp.config.wsgi
-release: python manage.py makemigrations --noinput
-release: python manage.py collectstatic --noinput
-release: python manage.py migrate --noinput
+
+migrate: bash python manage.py migrate
+web: gunicorn LibraryApp.config.wsgi --log-file--
