@@ -37,8 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # Local Apps
+    'LibraryApp.authentication',
     'LibraryApp.book',
+    'LibraryApp.bookapi',
+
+    # Third Party Apps
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +85,7 @@ WSGI_APPLICATION = 'LibraryApp.config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'library',
+        'NAME': 'lib',
         'USER': 'wangari',
         'PASSWORD': '7890',
         'HOST': 'localhost',
@@ -104,7 +111,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTH_USER_MODEL = "authentication.User"
 
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'LibraryApp.authentication.jwt.JWTAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': "rest_framework.pagination.PageNumberPagination",
+    'PAGE_SIZE': 12
+
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
